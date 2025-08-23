@@ -1,0 +1,8 @@
+canvas{
+    background-color: grey;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
