@@ -6,15 +6,21 @@ let listeCercles = []
 let nombreDeVie = 3;
 
 const afficher = () => {
-    for(let x of listeCercles){
-        x.dessiner(ctx);
-        console.log(x.x,x.y,x.rayon)
-    }
-}
-
-const aggrandir = () => {
-    for(let x of listeCercles){
-        aggrandirCercle(x);
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    if(nombreDeVie > 0){
+        for(let x of listeCercles){
+            if(x.rayon <= 0.1 && x.phase === "retrecissement"){
+                supprimer(x)
+                nombreDeVie -= 1;
+            }else{
+                x.mettreAJour();
+                x.dessiner(ctx);
+                console.log(x.x,x.y,x.rayon)
+            }
+        }
+        requestAnimationFrame(afficher)   
+    }else{
+        alert("perdu")
     }
 }
 
@@ -23,19 +29,7 @@ const creerCercle = () => {
     let y = Math.random() * 350
     let circle = new cercle(x,y,0,0,2 * Math.PI);
     listeCercles.push(circle)
-}
-
-const aggrandirCercle = (cercle) => {
-    while (cercle.rayon < 25){
-        cercle.rayon += 1
-    }
-    while (cercle.rayon > 0){
-        cercle.rayon -= 1
-    }
-    if (cercle.rayon === 0){
-        //supprimer(cercle)
-        nombreDeVie -= 1;
-    }
+    circle.dessiner(ctx);
 }
 
 const supprimer = (cercle) => {
@@ -43,7 +37,11 @@ const supprimer = (cercle) => {
     listeCercles.splice(index,1)
 }
 
-setInterval(creerCercle,1000)
-aggrandir()
-afficher()
+
+const main = () => {
+    setInterval(creerCercle,1000)
+    afficher()
+}
+
+main()
 
