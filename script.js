@@ -5,6 +5,12 @@ let ctx = canvas.getContext("2d");
 let listeCercles = []
 let nombreDeVie = 3;
 
+canvas.addEventListener("click", () => {
+    for(let x of listeCercles){
+        // if souris dans cercle 
+    }
+})
+
 const afficher = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if(nombreDeVie > 0){

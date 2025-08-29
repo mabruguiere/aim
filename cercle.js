@@ -28,6 +28,9 @@ export class cercle{
                 this.rayon -= this.vitesse;
             }
         }
+    }
 
+    contient = () => {
+        
     }
 }
