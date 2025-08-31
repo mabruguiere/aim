@@ -1,13 +1,22 @@
 import { cercle } from './cercle.js'
+import { point } from './point.js'
 
 let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 let listeCercles = []
 let nombreDeVie = 3;
+let temps = 1000;
+let diminution = 5;
+let intervalID = null;
 
-canvas.addEventListener("click", () => {
-    for(let x of listeCercles){
-        // if souris dans cercle 
+canvas.addEventListener("click", (event) => {
+    for(let circle of listeCercles){
+        let rectangle = canvas.getBoundingClientRect();
+        let posSouris = new point(event.clientX-rectangle.left,event.clientY - rectangle.top)
+        let centreCercle = circle.centre()        
+        if(point.estDansLeCercle(posSouris,centreCercle,circle.rayon)){
+            supprimer(circle);
+        } 
     }
 })
 
@@ -21,7 +30,6 @@ const afficher = () => {
             }else{
                 x.mettreAJour();
                 x.dessiner(ctx);
-                console.log(x.x,x.y,x.rayon)
             }
         }
         requestAnimationFrame(afficher)   
@@ -43,9 +51,18 @@ const supprimer = (cercle) => {
     listeCercles.splice(index,1)
 }
 
+const boucleCercles = () => {
+    creerCercle();
+
+    if (temps > 300) {
+        temps -= diminution;
+    }
+
+    setTimeout(boucleCercles, temps);
+}
 
 const main = () => {
-    setInterval(creerCercle,1000)
+    boucleCercles();
     afficher()
 }
 

@@ -1,3 +1,5 @@
+import { point } from './point.js'
+
 export class cercle{
 
     constructor(x,y,rayon,angleDepart = 0, sensAntiHoraire = 2 * Math.PI){
@@ -10,6 +12,10 @@ export class cercle{
         this.phase = "aggrandissement"
     }
 
+    centre = () => {
+        return new point(this.x,this.y)
+    }
+
     dessiner = (ctx) => {
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.rayon,this.angleDepart,this.sensAntiHoraire);
@@ -20,7 +26,7 @@ export class cercle{
 
         if(this.phase === "aggrandissement"){
             this.rayon += this.vitesse;
-            if(this.rayon >= 25){
+            if(this.rayon >= 30){
                 this.phase = "retrecissement"
             }
         }else{
