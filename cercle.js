@@ -19,6 +19,8 @@ export class cercle{
     dessiner = (ctx) => {
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.rayon,this.angleDepart,this.sensAntiHoraire);
+        ctx.fillStyle = "white";
+        ctx.fill(); 
         ctx.stroke();
     }
 
