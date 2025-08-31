@@ -7,7 +7,7 @@ let listeCercles = []
 let nombreDeVie = 3;
 let temps = 500;
 
-canvas.addEventListener("click", (event) => {
+canvas.addEventListener("mousedown", (event) => {
     for(let circle of listeCercles){
         let rectangle = canvas.getBoundingClientRect();
         let posSouris = new point(event.clientX-rectangle.left,event.clientY - rectangle.top)
