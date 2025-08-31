@@ -5,9 +5,7 @@ let canvas = document.querySelector("canvas");
 let ctx = canvas.getContext("2d");
 let listeCercles = []
 let nombreDeVie = 3;
-let temps = 1000;
-let diminution = 5;
-let intervalID = null;
+let temps = 500;
 
 canvas.addEventListener("click", (event) => {
     for(let circle of listeCercles){
@@ -51,18 +49,8 @@ const supprimer = (cercle) => {
     listeCercles.splice(index,1)
 }
 
-const boucleCercles = () => {
-    creerCercle();
-
-    if (temps > 300) {
-        temps -= diminution;
-    }
-
-    setTimeout(boucleCercles, temps);
-}
-
 const main = () => {
-    boucleCercles();
+    setInterval(creerCercle,temps)
     afficher()
 }
 
